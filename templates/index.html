@@ -1,0 +1,173 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <title>Conversion de formats et Compression de fichiers</title>
+</head>
+<body>
+    <h1>Conversion de formats et Compression de fichiers</h1>
+
+    <h2>Compression de fichier</h2>
+    <form method="POST" enctype="multipart/form-data" action="/compress">
+        <input type="file" name="file">
+        <button type="submit">Compresser</button>
+    </form>
+
+    <br>
+
+    <h2>Décompression de fichier</h2>
+    <form method="POST" enctype="multipart/form-data" action="/decompress">
+        <input type="file" name="zip_file">
+        <button type="submit">Décompresser</button>
+    </form>
+
+    <br>
+
+    <h2>Conversion de formats de documents</h2>
+    <form method="POST" enctype="multipart/form-data" action="/convert">
+        <h3>Conversion de DOCX en PDF</h3>
+        <input type="file" name="docx_file">
+        <button type="submit" name="docx_to_pdf">Convertir en PDF</button>
+    </form>
+
+    <br>
+
+    <form method="POST" enctype="multipart/form-data" action="/convert">
+        <h3>Conversion de PDF en DOCX</h3>
+        <input type="file" name="pdf_file">
+        <button type="submit" name="pdf_to_docx">Convertir en DOCX</button>
+    </form>
+
+    <br>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div>
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+</body>
+</html>
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Conversion de formats et Compression de fichiers</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Ajout de quelques styles personnalisés si nécessaire */
+        body {
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Conversion de formats et Compression de fichiers</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Compression de fichier</h2>
+                <form method="POST" enctype="multipart/form-data" action="/compress">
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputCompress" name="file">
+                            <label class="custom-file-label" for="inputCompress">Choisir un fichier</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Compresser <i class="fas fa-file-archive"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <h2>Décompression de fichier</h2>
+                <form method="POST" enctype="multipart/form-data" action="/decompress">
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputDecompress" name="zip_file">
+                            <label class="custom-file-label" for="inputDecompress">Choisir un fichier ZIP</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Décompresser <i class="fas fa-file-archive"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Conversion de formats de documents</h2>
+                <form method="POST" enctype="multipart/form-data" action="/convert">
+                    <h3>Conversion de DOCX en PDF</h3>
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputDocxToPdf" name="docx_file">
+                            <label class="custom-file-label" for="inputDocxToPdf">Choisir un fichier DOCX</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button type="submit" name="docx_to_pdf" class="btn btn-success">Convertir en PDF <i class="fas fa-file-pdf"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <h2>&nbsp;</h2> <!-- Ajout d'un espace pour l'alignement -->
+                <form method="POST" enctype="multipart/form-data" action="/convert">
+                    <h3>Conversion de PDF en DOCX</h3>
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputPdfToDocx" name="pdf_file">
+                            <label class="custom-file-label" for="inputPdfToDocx">Choisir un fichier PDF</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button type="submit" name="pdf_to_docx" class="btn btn-info">Convertir en DOCX <i class="fas fa-file-word"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Affichage des messages -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="alert alert-info" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+    </div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.custom-file-input').on('change', function(){
+            // Récupère le nom du fichier sélectionné
+            let fileName = $(this).val().split('\\').pop();
+            // Met à jour le libellé du champ personnalisé
+            $(this).next('.custom-file-label').html(fileName);
+        });
+    });
+</script>
+
+</body>
+</html>
